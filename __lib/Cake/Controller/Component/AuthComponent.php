@@ -330,6 +330,7 @@ class AuthComponent extends Component {
 		if (empty($this->authorize) || $this->isAuthorized($this->user())) {
 			return true;
 		}
+		
 
 		$this->flash($this->authError);
 		$controller->redirect($controller->referer('/'), null, true);
@@ -390,6 +391,7 @@ class AuthComponent extends Component {
  * @throws CakeException
  */
 	public function constructAuthorize() {
+		
 		if (empty($this->authorize)) {
 			return;
 		}
@@ -604,6 +606,7 @@ class AuthComponent extends Component {
  * @return string Redirect URL
  */
 	public function redirect($url = null) {
+		
 		if (!is_null($url)) {
 			$redir = $url;
 			$this->Session->write('Auth.redirect', $redir);
