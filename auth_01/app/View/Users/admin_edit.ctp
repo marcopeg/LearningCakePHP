@@ -1,48 +1,49 @@
-<div class="users form">
-<?php echo $this->Form->create('User');?>
-	<fieldset>
-		<legend><?php echo __('Admin Edit User'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('role');
-	?>
-	</fieldset>
+<?php
+echo $this->Form->create('User',array( 'class'=>'form uniformForm' ));
+
+	echo $this->Html->widget(array(
+		'title' 	=> 'Edit Content',
+		'content' 	=> array(
+			$this->Form->input('id'),
+			$this->Form->input('username'),
+			$this->Form->inputs(array(
+					'legend' => 'Password',
+					'password',
+					'confirm_password' => array( 'data-tipsy-gravity'=>'sw' )
+				)),
+			$this->Form->input('role')
+		)
+	));
 	
-	<fieldset>
-		<legend>Roles</legend>
-		<?php
-		foreach ( $app_actions as $controller=>$actions ) {
-			echo $this->Html->tag( 'h4', $controller );
+	
+	
+	ob_start();
+	foreach ( $app_actions as $area=>$controllers ) {
+		echo $this->Html->tag( 'h4', $area );
+		
+		foreach ( $controllers as $controller=>$actions ) {
 			
-			foreach ( $actions as $action ) {
+			$fields = array(
+				'legend' => $controller
+			);
+			
+			foreach ( $actions as $action=>$info ) {
 				
 				$permName = $controller . '__' . $action;
 				
-				echo $this->Form->input($permName,array(
+				$fields[$permName] = array(
 					'type' => 'checkbox',
-					'label' => $action
-				));
+					'label' => $info['label']
+				);
 			
 			}
 			
+			echo $this->Form->inputs($fields);
+		
 		}
-		?>
-	</fieldset>
+		
+	}
 	
-	
-<?php echo $this->Form->end(__('Submit'));?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+	echo $this->Html->widget( 'Permissions', ob_get_clean() );
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Replies'), array('controller' => 'replies', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Reply'), array('controller' => 'replies', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+echo $this->Form->end(__('Submit'));

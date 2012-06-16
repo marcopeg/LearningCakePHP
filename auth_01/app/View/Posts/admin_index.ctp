@@ -1,3 +1,4 @@
+
 <div class="posts index">
 	<h2><?php echo __('Posts');?></h2>
 	<table cellpadding="0" cellspacing="0">

@@ -1,5 +1,7 @@
 <?php
-App::uses('AppController', 'Controller');
+
+
+#App::uses('AppController', 'Controller');
 /**
  * Posts Controller
  *
@@ -7,7 +9,22 @@ App::uses('AppController', 'Controller');
  */
 class PostsController extends AppController {
 
-
+	
+	public $helpers = array( 'CakePower.PowerMenu' );
+	
+	
+	public $adminActions = array(
+		'admin_foo' => 'A foo method..'
+	);
+	
+	
+	public function beforeRender() {
+		
+		parent::beforeRender();
+		
+		PowerMenu::setActive('admin.sidebar.posts');
+		
+	}
 
 
 
@@ -20,7 +37,7 @@ class PostsController extends AppController {
 
 
 
-
+	public function admin_foo() {}
 
 
 
@@ -34,6 +51,7 @@ class PostsController extends AppController {
 	public function admin_index() {
 		$this->Post->recursive = 0;
 		$this->set('posts', $this->paginate());
+		
 	}
 
 /**

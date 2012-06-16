@@ -17,6 +17,10 @@ class User extends AppModel {
 			'notempty' => array(
 				'rule' 		=> 'notempty',
 				'required' 	=> true,
+			),
+			'unique' => array(
+				'rule' => 'uniqueUsername',
+				'required' => true
 			)
 		),
 		'password' => array(
@@ -24,6 +28,11 @@ class User extends AppModel {
 				'rule' => 'notempty',
 				'required' 	=> true,
 				'on'		=> 'create'
+			)
+		),
+		'confirm_password' => array(
+			'equal' => array(
+				'rule'	=> 'matchPassword',
 			)
 		)
 	);
@@ -47,6 +56,17 @@ class User extends AppModel {
 	);
 	
 	
+	function uniqueUsername() { return false; }
+	
+	function matchPassword() {
+		
+		return false;
+		
+		if ( empty($this->data[$this->alias]['password']) ) return true;
+		
+		return $this->data[$this->alias]['password'] === $this->data[$this->alias]['confirm_password'];
+	
+	}
 	
 	
 	

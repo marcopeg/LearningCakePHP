@@ -20,7 +20,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-App::uses( 'CakePanelController', 'CakePanel.Controller' );
+
 
 /**
  * Application Controller
@@ -32,6 +32,8 @@ App::uses( 'CakePanelController', 'CakePanel.Controller' );
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends CakePanelController {
+	
+	public $layout = 'CakePanel.admin.default';
 	
 	public $components = array(
 		'Auth' => array(

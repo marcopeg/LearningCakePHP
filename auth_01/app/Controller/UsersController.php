@@ -6,8 +6,18 @@ App::uses('AppController', 'Controller');
  * @property User $User
  */
 class UsersController extends AppController {
-
-
+	
+	
+	public $adminActions = array();
+	
+	/*
+	public $__paginate = array(
+		'limit' => 99999
+	);
+	*/
+	
+	
+	
 	public function beforeRender() {
 		
 		parent::beforeRender();
@@ -16,6 +26,8 @@ class UsersController extends AppController {
 			'admin' 	=> 'Blog Manager',
 			'author'	=> 'Blog Author'
 		));
+		
+		PowerMenu::setActive('admin.sidebar.users');
 	
 	}
 	
@@ -32,7 +44,7 @@ class UsersController extends AppController {
 				$this->redirect($this->Auth->redirect());
 				
 			} else {
-				$this->Session->setFlash(__('Invalid username or password'));
+				$this->Session->ko(__('Invalid username or password'));
 				
 			}
 			
@@ -100,38 +112,7 @@ class UsersController extends AppController {
 		
 		
 		
-		
-		// Build a list of controller actions
-		$app_actions = array();
-		$cakeClasses = array( 'AppController' );
-		$cakeActions = get_class_methods('Controller');
-		
-		foreach ( App::objects('Controller') as $controller ) {
-			
-			if ( in_array($controller,$cakeClasses) ) continue;
-			
-			App::import( $controller, 'Controller' );
-			
-			$acts = array( '*' );
-			$cacts = get_class_methods($controller);
-			if ( empty($cacts) ) $cacts = array();
-			
-			foreach ( $cacts as $act ) {
-				
-				if ( in_array($act,$cakeActions) ) continue;
-				
-				if ( in_array($act,$acts) ) continue;
-				
-				if ( strpos($act,'admin_') === false ) continue;
-				
-				$acts[] = $act;
-				
-			}
-			
-			$app_actions[$controller] = $acts;
-			
-		}
-		
+		$app_actions = PowerApp::adminActions();
 		$this->set(compact('app_actions'));
 		
 
@@ -139,27 +120,26 @@ class UsersController extends AppController {
 		
 		if ($this->request->is('post') || $this->request->is('put')) {
 			
-			// Rebuild permissions list.
+			
 			$this->request->data[$this->User->alias]['permissions'] = array();
-			foreach ( $app_actions as $controller=>$actions ) {
-				foreach ( $actions as $action ) {
-					
-					$perm = $controller.'__'.$action;
-					
-					if ( isset($this->request->data[$this->User->alias][$perm]) && !empty($this->request->data[$this->User->alias][$perm]) ) {
-						$this->request->data[$this->User->alias]['permissions'][] = $perm;
-					}
+			foreach ( PowerApp::adminActionsList() as $name=>$action ) {
 				
+				$perm = $action['controller'].'__'.$action['method'];
+					
+				if ( isset($this->request->data[$this->User->alias][$perm]) && !empty($this->request->data[$this->User->alias][$perm]) ) {
+					$this->request->data[$this->User->alias]['permissions'][] = $perm;
 				}
 			}
 			
 			
+			
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved'));
+				$this->ok(__('The user has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->ko(__('The user could not be saved. Please, try again.'));
 			}
+			
 		} else {
 			$this->request->data = $this->User->read(null, $id);
 			unset($this->request->data[$this->User->alias]['password']);
