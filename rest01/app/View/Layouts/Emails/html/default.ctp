@@ -1,9 +1,5 @@
 <?php
 /**
- * Application level View Helper
- *
- * This file is application-wide helper file. You can put all
- * application-wide helper-related methods here.
  *
  * PHP 5
  *
@@ -15,20 +11,19 @@
  *
  * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Helper
- * @since         CakePHP(tm) v 0.2.9
+ * @package       Cake.View.Layouts.Emails.html
+ * @since         CakePHP(tm) v 0.10.0.1076
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<title><?php echo $title_for_layout;?></title>
+</head>
+<body>
+	<?php echo $content_for_layout;?>
 
-App::uses('Helper', 'View');
-
-/**
- * Application helper
- *
- * Add your application-wide methods in the class below, your helpers
- * will inherit them.
- *
- * @package       app.View.Helper
- */
-class AppHelper extends CakePowerHelper {
-}
+	<p>This email was sent using the <a href="http://cakephp.org">CakePHP Framework</a></p>
+</body>
+</html>

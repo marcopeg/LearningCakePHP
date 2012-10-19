@@ -1,0 +1,19 @@
+#curtaineroftheapp {
+  display:block;
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  right:0;
+  background:#000000 url(icons/spinner_bk_000.gif) center center no-repeat;
+  z-index:99999;
+}
+#login form:before {
+  content:"";
+  display:block;
+  width:223px;
+  height:45px;
+  background:url(icons/imcloudLogo_002.png) center center no-repeat;
+  background-size:100% 100%;
+  margin:20px auto;
+}

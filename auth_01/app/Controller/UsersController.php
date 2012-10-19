@@ -44,7 +44,7 @@ class UsersController extends AppController {
 				$this->redirect($this->Auth->redirect());
 				
 			} else {
-				$this->Session->ko(__('Invalid username or password'));
+				$this->Session->error(__('Invalid username or password'));
 				
 			}
 			
