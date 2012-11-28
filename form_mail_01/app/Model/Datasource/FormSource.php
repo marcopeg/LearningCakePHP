@@ -12,46 +12,23 @@ class FormSource extends DataSource {
 	);
 	
 	public function listSources() {
-		
 		return array('forms');
-		
 	}
 	
-	public function describe( $model ) {
-		
+	public function describe($model) {
 		return $this->_schema['forms'];
-		
 	}
 	
-	/*
-	public function create( $model, $fields = array(), $values = array() ) {
+	public function create($model, $fields = array(), $values = array()) {
 		
 		$data = array_combine($fields, $values);
 		
 		// Create the email object and set receiver.
 		$email = new CakeEmail();
-		$email->to('marco.pegoraro@gmail.com');
+		$email->to($data['email']);
 		
 		// Form based data.
-		$email->from($data['email']);
-		$email->subject($data['subject']);
-		
-		// Try to send message and return value as create() outcome
-		if ( $email->send( $data['message'] ) ) return true; else return false;
-	
-	}
-	*/
-	
-	public function create( $model, $fields = array(), $values = array() ) {
-		
-		$data = array_combine($fields, $values);
-		
-		// Create the email object and set receiver.
-		$email = new CakeEmail();
-		$email->to('your@email.com');
-		
-		// Form based data.
-		$email->from($data['email']);
+		$email->from('noreply@yourcustomserver.com');
 		$email->subject($data['subject']);
 		
 		// HTML template info.
@@ -59,8 +36,12 @@ class FormSource extends DataSource {
 		$email->template('form');
 		$email->viewVars($data);
 		
-		if ( $email->send() ) return true; else return false;
-		return false;
+		// Send email
+		if ($email->send()) {
+			return true;
+		} else {
+			return false;
+		}
 			
 	}
 	

@@ -1,0 +1,215 @@
+/**
+ * CakePHP + CakePOWER REST Service Tutorial Demo
+ * ==============================================
+ *
+ * @author:		Marco Pegoraro
+ * @contact:	marco(dot)pegoraro(at)gmail(dot)com
+ * @follow:		@thepeg
+ * @blog:		http://movableapp.com
+ * @blog:		http://consulenza-web.com
+ *
+ * This sofware is distributed under MIT license.
+ * Please read the "readme.txt" file from the root of this package
+ *
+ */
+
+
+@import "LessMixin/mixin";
+
+
+
+
+
+#curtaineroftheapp {
+	
+	display:block;
+	width:100%;
+	height:100%;
+	
+	position: fixed;
+	top:0;
+	right:0;
+	
+	background: #000 url(icons/spinner_bk_000.gif) center center no-repeat;
+	z-index: 99999;
+	
+}
+
+
+
+
+
+
+/* box shadow applicata al campo di un form */
+.fieldBoxShadow( @bc ) {
+	
+	-webkit-box-shadow: 1px 1px 1px @bc, -2px -2px 1px @bc, 1px 0px 1px @bc, 0px 2px 1px @bc, -2px 0px 1px @bc, 0px -2px 1px @bc;
+	-moz-box-shadow: 1px 1px 1px @bc, -2px -2px 1px @bc, 1px 0px 1px @bc, 0px 2px 1px @bc, -2px 0px 1px @bc, 0px -2px 1px @bc;
+	box-shadow: 1px 1px 1px @bc, -2px -2px 1px @bc, 1px 0px 1px @bc, 0px 2px 1px @bc, -2px 0px 1px @bc, 0px -2px 1px @bc;
+
+}
+
+
+html, body {
+	
+	background: transparent;
+	margin:0;
+	padding:0;
+	
+	font-size: 100.01%;
+	width:100%;
+	.tc;
+	
+	font-family: helvetica;
+	font-size:12px;
+	
+}
+
+html {
+	
+	background: #00000a url(desktop/bg_001.jpg) center top fixed no-repeat;
+	
+}
+
+.card-panel {
+	
+	.block( 370px );
+	.mh( auto );
+	.mt( 5% );
+	
+	h2 {
+		color:#fff;
+		margin:0;
+	}
+	
+	form {
+		
+		.border-radius( 10px );
+		.tl;
+		
+		padding:20px;
+		
+background: #bbbab8; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2JiYmFiOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM0JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(top,  #bbbab8 0%, #ffffff 34%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bbbab8), color-stop(34%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #bbbab8 0%,#ffffff 34%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #bbbab8 0%,#ffffff 34%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #bbbab8 0%,#ffffff 34%); /* IE10+ */
+background: linear-gradient(to bottom,  #bbbab8 0%,#ffffff 34%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bbbab8', endColorstr='#ffffff',GradientType=0 ); /* IE6-8 */
+
+		
+		
+		fieldset {
+			
+			border:none;
+			margin:0;
+			padding:0;
+			
+			legend {
+				
+				.block( 320px );
+				padding: 5px 5px;
+				color:#333;
+				border-bottom:1px solid #666;
+				
+			}
+			
+		}
+		
+		label {
+			.none;
+		}
+		
+		input[type=text], input[type=password] {
+			
+			.block( 308px );
+			.mv( 10px );
+			.mb( 25px );
+			.border-radius( 2px );
+			
+			background: #fff;
+			padding:8px 10px;
+			font-size:1.1em;
+			
+			
+			border:1px solid #c1c4c7;
+			outline: #f4f6f7 solid 4px;
+						
+			&:focus {
+				background: #fff;
+				border-color:#95C5DB;
+				outline: #E4F0FB solid 4px;
+			}
+			
+		}
+		
+		.submit { .tr }
+		
+		input[type=submit] {
+			
+	
+			-moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+			-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+			box-shadow:inset 0px 1px 0px 0px #dcecfb;
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #bddbfa), color-stop(1, #80b5ea) );
+			background:-moz-linear-gradient( center top, #bddbfa 5%, #80b5ea 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bddbfa', endColorstr='#80b5ea');
+			background-color:#bddbfa;
+			.border-radius( 20px );
+			border:1px solid #74b3f2;
+			display:inline-block;
+			color:#454359;
+			font-family:arial;
+			font-size:15px;
+			font-weight:bold;
+			padding:6px 24px;
+			text-decoration:none;
+			text-shadow:1px 1px 0px #ccdae8;
+			
+			&:hover {
+				
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
+				background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#80b5ea', endColorstr='#bddbfa');
+				background-color:#80b5ea;
+				
+			}
+			
+			&:active {
+				position:relative;
+				top:1px;			
+			}
+			
+			
+			
+		}
+	
+	}
+	
+	p {
+		
+		color:#fff;
+		
+		a {
+			
+			color:#d3ebf5;
+			
+		}
+		
+	}
+	
+}
+
+
+form:before {
+	
+	content: "";
+	.block( 223px, 45px );
+	background: url(icons/imcloudLogo_001.png) center center no-repeat;
+	background-size: 100% 100%;
+	margin: 20px auto;
+	
+}

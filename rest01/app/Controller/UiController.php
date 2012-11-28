@@ -22,7 +22,7 @@ class UiController extends AppController {
 		
 		parent::beforeFilter();
 		
-		Configure::write( 'debug', 0 );
+		#Configure::write( 'debug', 0 );
 		
 	}
 	
